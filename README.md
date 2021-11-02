@@ -7,10 +7,15 @@
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/mish-tv/m3u8-query-proxy.svg?style=flat" alt="license"></a>
 </div>
 
-<h4 align="center">`@mish-tv/m3u8-query-proxy` is ${description}</h4>
-
+<h4 align="center">`@mish-tv/m3u8-query-proxy` is a proxy server that adds a query to the value of a URI.</h4>
+<p>This is designed to be used to give CDN authentication tokens when playing hls in iOS browsers.</p>
 
 ## Installation
 ```
-npm install --save @mish-tv/m3u8-query-proxy
+npm install -g @mish-tv/m3u8-query-proxy
+```
+
+## Usage
+```
+M3U8_ORIGIN=https://cdn.example.com npx m3u8-query-proxy
 ```
