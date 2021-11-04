@@ -12,7 +12,7 @@
 
 ## Usage
 ```
-npm install -g @mish-tv/m3u8-query-proxy@0.0.2
+npm install -g @mish-tv/m3u8-query-proxy@0.0.3
 M3U8_ORIGIN="https://cdn.example.com" m3u8-query-proxy
 curl http://localhost:8080/foo/bar.m3u8?token=baz
 ```
