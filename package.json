@@ -1,6 +1,6 @@
 {
   "name": "@mish-tv/m3u8-query-proxy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "m3u8-query-proxy is a proxy server that adds a query to the value of a URI.",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
