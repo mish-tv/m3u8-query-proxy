@@ -37,7 +37,7 @@ const writeOriginPlaylist = async (requestURL: string, response: ServerResponse)
   const originResponse = await fetch(new URL(requestPath, m3u8Origin).toString());
   const body = await originResponse.text();
   if (originResponse.status !== 200) {
-    logger.warning(body, { requestURL });
+    logger.warning(body, { requestURL, requestPath });
     response.statusCode = originResponse.status;
     response.end();
 
@@ -48,13 +48,13 @@ const writeOriginPlaylist = async (requestURL: string, response: ServerResponse)
     try {
       return HLS.parse(body);
     } catch (e) {
-      logger.warning(body, { requestURL, e });
+      logger.warning(body, { requestURL, requestPath, e });
       response.statusCode = 400;
       response.end();
     }
   })();
   if (playlist == undefined) return;
-  convertPlaylist(playlist, m3u8Origin, requestURL);
+  convertPlaylist(playlist, m3u8Origin, requestPath);
 
   for (const key of proxyHeaders) {
     const value = originResponse.headers.get(key);
