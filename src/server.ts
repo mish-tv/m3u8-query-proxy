@@ -3,6 +3,7 @@ import { logger } from "@mish-tv/stackdriver-logger";
 import fetch from "node-fetch";
 import HLS from "hls-parser";
 
+import { createPathConverter } from "./path-converter";
 import { convertPlaylist } from "./convert-playlist";
 
 const getEnv = (key: string) =>
@@ -22,13 +23,23 @@ const proxyHeaders = [
   "access-control-allow-origin",
 ];
 
+const convertPath = createPathConverter(process.env["REMOVE_PATH"]);
+
 const writeOriginPlaylist = async (requestURL: string, response: ServerResponse) => {
-  const originResponse = await fetch(new URL(requestURL, m3u8Origin).toString());
+  const requestPath = convertPath(requestURL);
+  if (requestPath == undefined) {
+    logger.warning("invalid path", { requestURL, requestPath });
+    response.statusCode = 400;
+    response.end();
+
+    return;
+  }
+  const originResponse = await fetch(new URL(requestPath, m3u8Origin).toString());
   const body = await originResponse.text();
   if (originResponse.status !== 200) {
     logger.warning(body, { requestURL });
     response.statusCode = originResponse.status;
-    response.end(body);
+    response.end();
 
     return;
   }

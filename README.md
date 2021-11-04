@@ -13,10 +13,10 @@
 ## Usage
 ```
 npm install -g @mish-tv/m3u8-query-proxy@0.0.3
-M3U8_ORIGIN="https://cdn.example.com" m3u8-query-proxy
+M3U8_ORIGIN="https://cdn.example.com" REMOVE_PATH="/foo" m3u8-query-proxy
 curl http://localhost:8080/foo/bar.m3u8?token=baz
 ```
 
-If you make a request as shown above, the proxy will request to https://cdn.example.com/foo/bar.m3u8?token=baz.  
+If you make a request as shown above, the proxy will request to https://cdn.example.com/bar.m3u8?token=baz.  
 It will rewrite the response as needed.  
 Refer to [the test](https://github.com/mish-tv/m3u8-query-proxy/blob/main/src/convert-playlist.spec.ts) to see how to rewrite the response.
