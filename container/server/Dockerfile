@@ -1,3 +1,3 @@
 FROM node:14.17.5-bullseye-slim
-RUN npm install -g @mish-tv/m3u8-query-proxy@0.0.4
+RUN npm install -g @mish-tv/m3u8-query-proxy@0.0.5
 CMD ["m3u8-query-proxy"]
