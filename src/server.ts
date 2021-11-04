@@ -24,7 +24,25 @@ const proxyHeaders = [
 
 const writeOriginPlaylist = async (requestURL: string, response: ServerResponse) => {
   const originResponse = await fetch(new URL(requestURL, m3u8Origin).toString());
-  const playlist = HLS.parse(await originResponse.text());
+  const body = await originResponse.text();
+  if (originResponse.status !== 200) {
+    logger.warning(body, { requestURL });
+    response.statusCode = originResponse.status;
+    response.end(body);
+
+    return;
+  }
+
+  const playlist = (() => {
+    try {
+      return HLS.parse(body);
+    } catch (e) {
+      logger.warning(body, { requestURL, e });
+      response.statusCode = 400;
+      response.end();
+    }
+  })();
+  if (playlist == undefined) return;
   convertPlaylist(playlist, m3u8Origin, requestURL);
 
   for (const key of proxyHeaders) {
