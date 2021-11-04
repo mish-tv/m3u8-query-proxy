@@ -23,7 +23,7 @@ const proxyHeaders = [
   "access-control-allow-origin",
 ];
 
-const convertPath = createPathConverter(process.env["REMOVE_PATH"]);
+const convertPath = createPathConverter(process.env["REMOVE_PATH_PREFIX"]);
 
 const writeOriginPlaylist = async (requestURL: string, response: ServerResponse) => {
   const requestPath = convertPath(requestURL);
