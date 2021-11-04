@@ -1,0 +1,5 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "us-east4-docker.pkg.dev/mish-tv/m3u8-query-proxy/server:${_TAG}", "."]
+images:
+  - "us-east4-docker.pkg.dev/mish-tv/m3u8-query-proxy/server:${_TAG}"
